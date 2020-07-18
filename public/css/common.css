@@ -62,3 +62,34 @@ body {
 .card {
     margin: auto 15px;
 }
+
+.table {
+    text-align: center;
+}
+
+.status-success {
+    background-color: #46e075;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.status-failed {
+    background-color: #e95050;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.status-refund {
+    background-color: #eec53d;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}

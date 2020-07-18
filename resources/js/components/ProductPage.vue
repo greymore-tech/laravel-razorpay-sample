@@ -2,6 +2,11 @@
     <div
         class="d-flex justify-content-center align-items-center flex-column position-ref full-height"
     >
+        <nav class="nav justify-content-end">
+            <div class="top-right links m-1">
+                <a v-bind:href="main_page">Main Page</a>
+            </div>
+        </nav>
         <div class="title m-b-md">Our Products</div>
         <div class="content d-flex align-items-center">
             <div v-for="product in products" :key="product.id">
@@ -13,7 +18,8 @@
                         <a
                             v-bind:href="purchase_page + '/' + product.id"
                             class="btn btn-primary"
-                        >Buy Now</a>
+                            >Buy Now</a
+                        >
                     </div>
                 </div>
             </div>
@@ -27,6 +33,7 @@ import PurchasePage from "./PurchasePage.vue";
 export default {
     data() {
         return {
+            main_page: "/",
             purchase_page: "purchase",
             products: [
                 {

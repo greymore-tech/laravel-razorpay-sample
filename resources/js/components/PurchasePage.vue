@@ -1,5 +1,10 @@
 <template>
     <div class="container">
+        <nav class="nav justify-content-end">
+            <div class="top-right links m-1">
+                <a v-bind:href="product_page">Products Page</a>
+            </div>
+        </nav>
         <div class="row no-gutters">
             <div class="col-sm-6 col-md-12">
                 <div
@@ -78,6 +83,7 @@
                                 name="callback_url"
                                 :value="callback_url + product_id"
                             />
+
                             <input type="hidden" name="cancel_url" :value="cancel_url" />
                             <button
                                 type="submit"
@@ -96,12 +102,19 @@ var id = window.location.href.split("/").pop();
 var base_url = window.location.origin;
 
 export default {
-    props: ["razorpay_key", "order_id", "product_id"],
+    props: [
+        "razorpay_key",
+        "order_id",
+        "product_id",
+        "product_name",
+        "product_price"
+    ],
     data() {
         return {
             id: id,
             callback_url: base_url + "/payment/verify/",
             cancel_url: base_url + "/products",
+            product_page: "/products",
             products: [
                 {
                     id: "1",

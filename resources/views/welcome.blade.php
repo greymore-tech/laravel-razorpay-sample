@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="top-right links">
+        <a href="{{ url('transactions') }}">Transaction Details</a>
+    </div>
+
     <div class="d-flex justify-content-center align-items-center">
         <div class="content">
             @if (\Session::has('success'))
@@ -14,6 +18,7 @@
                     <p>{!! \Session::get('error') !!}</p>
                 </div>
             @endif
+
             <welcome></welcome>
         </div>
     </div>

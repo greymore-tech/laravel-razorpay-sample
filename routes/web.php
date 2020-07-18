@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('products', 'ProductController@index')->name('products');
+Route::get('products', 'ProductController@index')->name('index');
 
 Route::get('purchase/{product_id}', 'PurchaseController@index')->name('purchase');
 
 Route::post('payment/verify/{product_id}', 'PurchaseController@paymentVerify')->name('payment');
+
+Route::get('payment/{id}/refund/{payment_id}', 'PurchaseController@paymentRefund')->name('payment.refund');
+
+Route::get('transactions', 'PurchaseController@transactionDetails')->name('transaction.details');
