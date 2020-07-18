@@ -1932,10 +1932,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // props: ["products"],
+  // components: {
+  //     PurchasePage
+  // },
   data: function data() {
     return {
+      main_page: "/",
       purchase_page: "purchase",
       products: [{
         id: "1",
@@ -1952,7 +1978,25 @@ __webpack_require__.r(__webpack_exports__);
         name: "Product 3",
         description: "Product 3 Description",
         price: "30"
-      }]
+      }] // product_1: {
+      //     id: "1",
+      //     name: "Product 1",
+      //     description: "Product Description",
+      //     price: "10"
+      // },
+      // product_2: {
+      //     id: "2",
+      //     name: "Product 2",
+      //     description: "Product Description",
+      //     price: "20"
+      // },
+      // product_3: {
+      //     id: "3",
+      //     name: "Product 3",
+      //     description: "Product Description",
+      //     price: "30"
+      // }
+
     };
   }
 });
@@ -2061,15 +2105,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var id = window.location.href.split("/").pop();
-var base_url = window.location.origin;
+var base_url = window.location.origin; // var name = product_name;
+// var price = product_price;
+// var razorpay_key = config;
+// var order_id = $order["id"];
+// var callback_url = url("subscribe/" + $plan_name);
+// var cancel_url = url("subscribe");
+// console.log(product_price);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["razorpay_key", "order_id", "product_id"],
+  props: ["razorpay_key", "order_id", "product_id", "product_name", "product_price"],
   data: function data() {
     return {
       id: id,
+      // razorpay_key: config,
+      // order_id: order_id,
       callback_url: base_url + "/payment/verify/",
       cancel_url: base_url + "/products",
+      product_page: "/products",
       products: [{
         id: "1",
         name: "Product 1",
@@ -2087,6 +2166,240 @@ var base_url = window.location.origin;
         price: "30"
       }]
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TransactionDetails.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TransactionDetails.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      main_page: "/",
+      transactions: [],
+      transaction: {
+        id: "",
+        transaction_status: "",
+        email: "",
+        contact: "",
+        product_name: "",
+        product_price: "",
+        razorpay_payment_id: "",
+        razorpay_order_id: "",
+        razorpay_refund_id: "",
+        razorpay_refund_status: "",
+        // razorpay_signature: "",
+        error: ""
+      },
+      transaction_id: "",
+      pagination: {}
+    };
+  },
+  created: function created() {
+    //  get all transactions
+    this.fetchTransactions();
+  },
+  methods: {
+    //  Transaction data handling
+    fetchTransactions: function fetchTransactions(page_url) {
+      var _this = this;
+
+      var vm = this;
+      page_url = page_url || "api/transactions";
+      fetch(page_url).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.transactions = res.data;
+        vm.makePagination(res.meta, res.links);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    makePagination: function makePagination(meta, links) {
+      var pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: links.next,
+        prev_page_url: links.prev
+      };
+      this.pagination = pagination;
+    },
+    showTransaction: function showTransaction(transaction) {
+      this.transaction.id = transaction.id;
+      this.transaction.transaction_id = transaction.id;
+      this.transaction.transaction_status = transaction.transaction_status;
+      this.transaction.email = transaction.email;
+      this.transaction.contact = transaction.contact;
+      this.transaction.product_name = transaction.product_name;
+      this.transaction.product_price = transaction.product_price;
+      this.transaction.razorpay_payment_id = transaction.razorpay_payment_id;
+      this.transaction.razorpay_order_id = transaction.razorpay_order_id;
+      this.transaction.razorpay_refund_id = transaction.razorpay_refund_id;
+      this.transaction.razorpay_refund_status = transaction.razorpay_refund_status; // this.transaction.razorpay_signature =
+      //     transaction.razorpay_signature;
+
+      this.transaction.error = transaction.error;
+    }
   }
 });
 
@@ -37722,6 +38035,12 @@ var render = function() {
         "d-flex justify-content-center align-items-center flex-column position-ref full-height"
     },
     [
+      _c("nav", { staticClass: "nav justify-content-end" }, [
+        _c("div", { staticClass: "top-right links m-1" }, [
+          _c("a", { attrs: { href: _vm.main_page } }, [_vm._v("Main Page")])
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "title m-b-md" }, [_vm._v("Our Products")]),
       _vm._v(" "),
       _c(
@@ -37785,6 +38104,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "nav justify-content-end" }, [
+      _c("div", { staticClass: "top-right links m-1" }, [
+        _c("a", { attrs: { href: _vm.product_page } }, [
+          _vm._v("Products Page")
+        ])
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "row no-gutters" }, [
       _c("div", { staticClass: "col-sm-6 col-md-12" }, [
         _c(
@@ -37972,6 +38299,341 @@ var staticRenderFns = [
         staticClass: "form-control",
         attrs: { type: "number", name: "prefill[contact]", required: "" }
       })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TransactionDetails.vue?vue&type=template&id=5b74e92f&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TransactionDetails.vue?vue&type=template&id=5b74e92f& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("nav", { staticClass: "nav justify-content-end" }, [
+      _c("div", { staticClass: "top-right links m-1" }, [
+        _c("a", { attrs: { href: _vm.main_page } }, [_vm._v("Main Page")])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "d-flex justify-content-center align-items-center flex-column m-5"
+      },
+      [
+        _c("div", { staticClass: "title-2" }, [_vm._v("Transactions")]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.transactions, function(transaction) {
+              return _c("tr", { key: transaction.id }, [
+                _c("th", [_vm._v(_vm._s(transaction.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(transaction.email))]),
+                _vm._v(" "),
+                _c("td", [_vm._v("+" + _vm._s(transaction.contact))]),
+                _vm._v(" "),
+                transaction.transaction_status == "Success"
+                  ? _c("td", { staticClass: "status-success" }, [
+                      _vm._v(_vm._s(transaction.transaction_status))
+                    ])
+                  : transaction.transaction_status == "Refund"
+                  ? _c("td", { staticClass: "status-refund" }, [
+                      _vm._v(_vm._s(transaction.transaction_status))
+                    ])
+                  : _c("td", { staticClass: "status-failed" }, [
+                      _vm._v(_vm._s(transaction.transaction_status))
+                    ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.showTransaction(transaction)
+                        }
+                      }
+                    },
+                    [_vm._v("Details")]
+                  )
+                ]),
+                _vm._v(" "),
+                transaction.transaction_status == "Success"
+                  ? _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: {
+                            href:
+                              "payment/" +
+                              transaction.id +
+                              "/refund/" +
+                              transaction.razorpay_payment_id
+                          }
+                        },
+                        [_vm._v("Refund")]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+          _c("ul", { staticClass: "pagination" }, [
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: [{ disabled: !_vm.pagination.prev_page_url }]
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchTransactions(
+                          _vm.pagination.prev_page_url
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Previous")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item disabled" }, [
+              _c(
+                "a",
+                { staticClass: "page-link text-dark", attrs: { href: "#" } },
+                [
+                  _vm._v(
+                    "Page " +
+                      _vm._s(_vm.pagination.current_page) +
+                      " of " +
+                      _vm._s(_vm.pagination.last_page)
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: [{ disabled: !_vm.pagination.next_page_url }]
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchTransactions(
+                          _vm.pagination.next_page_url
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Next")]
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.transaction.id
+          ? _c("div", { staticClass: "float-right" }, [
+              _c("p", { staticClass: "sub-title" }, [
+                _vm._v("Transaction Details")
+              ]),
+              _vm._v(" "),
+              _vm.transaction.transaction_status == "Success"
+                ? _c("p", { staticClass: "status-success" }, [
+                    _vm._v(_vm._s(_vm.transaction.transaction_status))
+                  ])
+                : _vm.transaction.transaction_status == "Refund"
+                ? _c("p", { staticClass: "status-refund" }, [
+                    _vm._v(_vm._s(_vm.transaction.transaction_status))
+                  ])
+                : _c("p", { staticClass: "status-failed" }, [
+                    _vm._v(_vm._s(_vm.transaction.transaction_status))
+                  ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [_vm._v("Email:")]),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.transaction.email) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [_vm._v("Contact:")]),
+                _vm._v(" "),
+                _c("span", [_vm._v("+" + _vm._s(_vm.transaction.contact))])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [_vm._v("Product Name:")]),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.transaction.product_name) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [_vm._v("Product Price:")]),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(_vm._s(_vm.transaction.product_price) + " ₹")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [_vm._v("Razorpay Payment Id:")]),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.transaction.razorpay_payment_id) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _c("strong", [_vm._v("Razorpay Order Id:")]),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.transaction.razorpay_order_id) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _vm.transaction.transaction_status == "Failed"
+                ? _c("div", [
+                    _c("p", { staticClass: "sub-title" }, [
+                      _vm._v("Error Details")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("Code:")]),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.transaction.error.code) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("Description:")]),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.transaction.error.description) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("Source:")]),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.transaction.error.source) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("Reason:")]),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.transaction.error.reason) +
+                          "\n                "
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.transaction.transaction_status == "Refund"
+                ? _c("div", [
+                    _c("p", { staticClass: "sub-title" }, [
+                      _vm._v("Refund Details")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("Razorpay Refund Id:")]),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.transaction.razorpay_refund_id) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _c("strong", [_vm._v("Razorpay Refund Status:")]),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.transaction.razorpay_refund_status) +
+                          "\n                "
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e()
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Contact")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Status")]),
+        _vm._v(" "),
+        _c("th"),
+        _vm._v(" "),
+        _c("th")
+      ])
     ])
   }
 ]
@@ -50217,6 +50879,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component("welcome", __webpack_require__(/*! ./components/Welcome.vue */ "./resources/js/components/Welcome.vue")["default"]);
 Vue.component("products", __webpack_require__(/*! ./components/ProductPage.vue */ "./resources/js/components/ProductPage.vue")["default"]);
 Vue.component("purchase", __webpack_require__(/*! ./components/PurchasePage.vue */ "./resources/js/components/PurchasePage.vue")["default"]);
+Vue.component("transaction-details", __webpack_require__(/*! ./components/TransactionDetails.vue */ "./resources/js/components/TransactionDetails.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -50412,6 +51075,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/TransactionDetails.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/TransactionDetails.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TransactionDetails_vue_vue_type_template_id_5b74e92f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TransactionDetails.vue?vue&type=template&id=5b74e92f& */ "./resources/js/components/TransactionDetails.vue?vue&type=template&id=5b74e92f&");
+/* harmony import */ var _TransactionDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TransactionDetails.vue?vue&type=script&lang=js& */ "./resources/js/components/TransactionDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TransactionDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TransactionDetails_vue_vue_type_template_id_5b74e92f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TransactionDetails_vue_vue_type_template_id_5b74e92f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TransactionDetails.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TransactionDetails.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/TransactionDetails.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TransactionDetails.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TransactionDetails.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionDetails_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TransactionDetails.vue?vue&type=template&id=5b74e92f&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/TransactionDetails.vue?vue&type=template&id=5b74e92f& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionDetails_vue_vue_type_template_id_5b74e92f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TransactionDetails.vue?vue&type=template&id=5b74e92f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TransactionDetails.vue?vue&type=template&id=5b74e92f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionDetails_vue_vue_type_template_id_5b74e92f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TransactionDetails_vue_vue_type_template_id_5b74e92f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Welcome.vue":
 /*!*********************************************!*\
   !*** ./resources/js/components/Welcome.vue ***!
@@ -50499,8 +51231,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Anonymous\Documents\Laravel Projects\Laravel Internship Assignment 1\Deploy\product-page\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Anonymous\Documents\Laravel Projects\Laravel Internship Assignment 1\Deploy\product-page\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Anonymous\Documents\Laravel Projects\Laravel Internship Tasks\product-page\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Anonymous\Documents\Laravel Projects\Laravel Internship Tasks\product-page\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
